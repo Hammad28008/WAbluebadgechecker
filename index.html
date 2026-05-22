@@ -2,1526 +2,534 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>WhatsApp Blue Badge Eligibility Checker</title>
-<link rel="icon" type="image/x-icon" href="check.ico">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>WhatsApp Blue Badge Checker | Business & Individual Verification</title>
+<link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2325D366'><path d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z'/></svg>">
 <!-- Open Graph Meta Tags for Rich Sharing -->
 <meta property="og:title" content="WhatsApp Blue Badge Checker | Official Verification Tool" />
-<meta property="og:description" content="Find out instantly if your business qualifies for the official WhatsApp verification badge. Check your eligibility now." />
-<meta property="og:image" content="https://hammad28008.github.io/WAbluebadgechecker/check.png" />
-<meta property="og:image:type" content="image/png" />
-<meta property="og:image:width" content="1200" />
-<meta property="og:image:height" content="630" />
-<meta property="og:url" content="https://hammad28008.github.io/WAbluebadgechecker/" />
+<meta property="og:description" content="Check eligibility for WhatsApp Blue Badge — for businesses AND individual creators, influencers, public figures. Get personalized roadmap." />
+<meta property="og:image" content="https://placehold.co/1200x630/075E54/white?text=Blue+Badge+Checker" />
 <meta property="og:type" content="website" />
-<meta property="og:site_name" content="WhatsApp Blue Badge Checker" />
-
-<!-- Twitter Card (for completeness) -->
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="WhatsApp Blue Badge Checker" />
-<meta name="twitter:description" content="Check your business eligibility for WhatsApp's official blue verification badge." />
-<meta name="twitter:image" content="https://hammad28008.github.io/WAbluebadgechecker/check.png" />
-  <link rel="shortcut icon" type="image/x-icon" href="check.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
 <style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
   :root {
     --wa-green: #25D366;
     --wa-dark: #128C7E;
     --wa-teal: #075E54;
-    --bg: #f0f4f8;
+    --bg: #f6f9fc;
     --card: #ffffff;
-    --text: #1a1a2e;
+    --text: #1e293b;
     --muted: #64748b;
-    --border: #e2e8f0;
+    --border: #e2edf2;
     --success: #10b981;
     --warning: #f59e0b;
     --danger: #ef4444;
     --info: #3b82f6;
-    --radius: 16px;
-    --radius-sm: 10px;
+    --radius: 20px;
+    --radius-sm: 12px;
   }
-
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-
   body {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Inter', sans-serif;
     background: var(--bg);
     color: var(--text);
-    min-height: 100vh;
+    line-height: 1.5;
   }
-
-  /* === HEADER === */
-  .header {
-    background: linear-gradient(135deg, var(--wa-teal) 0%, var(--wa-dark) 50%, #1a6b5e 100%);
-    padding: 3rem 2rem 4rem;
+  /* header */
+  .hero {
+    background: linear-gradient(145deg, var(--wa-teal) 0%, #0a4b42 100%);
+    padding: 2.5rem 1.5rem 3rem;
     text-align: center;
     position: relative;
-    overflow: hidden;
   }
-  .header::before {
-    content: '';
-    position: absolute;
-    top: -60px; right: -60px;
-    width: 200px; height: 200px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.05);
-  }
-  .header::after {
-    content: '';
-    position: absolute;
-    bottom: -40px; left: -40px;
-    width: 140px; height: 140px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.04);
-  }
-  .badge-icon {
-    width: 70px; height: 70px;
-    background: rgba(255,255,255,0.15);
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    margin: 0 auto 1.2rem;
-    backdrop-filter: blur(10px);
-    border: 2px solid rgba(255,255,255,0.25);
-  }
-  .badge-icon svg { width: 36px; height: 36px; fill: #25D366; }
-  .header h1 {
-    font-family: 'Syne', sans-serif;
-    font-size: 2rem;
-    font-weight: 800;
-    color: #fff;
-    margin-bottom: 0.5rem;
-    letter-spacing: -0.5px;
-  }
-  .header p {
-    color: rgba(255,255,255,0.75);
-    font-size: 1rem;
-    max-width: 480px;
-    margin: 0 auto;
-  }
-
-  /* === LAYOUT === */
-  .container {
-    max-width: 860px;
-    margin: -2rem auto 3rem;
-    padding: 0 1.5rem;
-    position: relative;
-    z-index: 10;
-  }
-
-  /* === STEPS NAV === */
-  .steps-nav {
+  .hero-icon {
+    background: rgba(255,255,255,0.2);
+    width: 72px;
+    height: 72px;
+    border-radius: 60px;
     display: flex;
-    background: var(--card);
-    border-radius: var(--radius);
-    padding: 1rem;
-    gap: 0.5rem;
-    margin-bottom: 1.5rem;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-  }
-  .step-pill {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: 4px;
-    padding: 0.6rem 0.5rem;
-    border-radius: var(--radius-sm);
+    justify-content: center;
+    margin: 0 auto 1rem;
+    backdrop-filter: blur(4px);
+  }
+  .hero-icon svg { width: 36px; fill: white; }
+  .hero h1 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: white;
+    letter-spacing: -0.3px;
+  }
+  .hero p {
+    color: rgba(255,255,255,0.85);
+    max-width: 500px;
+    margin: 0.5rem auto 0;
+    font-size: 0.95rem;
+  }
+  .container {
+    max-width: 880px;
+    margin: -2rem auto 3rem;
+    padding: 0 1.2rem;
+  }
+  /* selector toggle */
+  .entity-selector {
+    background: var(--card);
+    border-radius: 60px;
+    padding: 6px;
+    display: flex;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  }
+  .entity-btn {
+    flex: 1;
+    text-align: center;
+    padding: 0.7rem 0.5rem;
+    border-radius: 40px;
+    font-weight: 600;
+    font-size: 0.9rem;
     cursor: pointer;
     transition: all 0.2s;
-    border: 2px solid transparent;
-  }
-  .step-pill.active { background: #f0fdf8; border-color: var(--wa-green); }
-  .step-pill.done { background: #f0fdf8; opacity: 0.75; }
-  .step-num {
-    width: 28px; height: 28px;
-    border-radius: 50%;
-    background: var(--border);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 12px; font-weight: 600;
+    background: transparent;
     color: var(--muted);
-    transition: all 0.2s;
   }
-  .step-pill.active .step-num {
+  .entity-btn.active {
     background: var(--wa-green);
-    color: #fff;
+    color: white;
+    box-shadow: 0 2px 8px rgba(37,211,102,0.3);
   }
-  .step-pill.done .step-num {
-    background: var(--success);
-    color: #fff;
-  }
-  .step-label {
-    font-size: 11px;
-    color: var(--muted);
-    font-weight: 500;
-    text-align: center;
-  }
-  .step-pill.active .step-label { color: var(--wa-dark); }
-
-  /* === CARD === */
+  /* cards */
   .card {
     background: var(--card);
     border-radius: var(--radius);
-    padding: 2rem;
+    padding: 1.6rem;
     margin-bottom: 1.5rem;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    box-shadow: 0 4px 14px rgba(0,0,0,0.03);
+    border: 1px solid var(--border);
   }
   .card-title {
-    font-family: 'Syne', sans-serif;
-    font-size: 1.2rem;
     font-weight: 700;
-    margin-bottom: 0.3rem;
-    color: var(--text);
+    font-size: 1.2rem;
+    margin-bottom: 0.25rem;
   }
   .card-desc {
-    font-size: 0.875rem;
     color: var(--muted);
-    margin-bottom: 1.5rem;
-    line-height: 1.6;
-  }
-
-  /* === FORM ELEMENTS === */
-  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-  .form-group { display: flex; flex-direction: column; gap: 6px; }
-  .form-group.full { grid-column: 1 / -1; }
-  label {
     font-size: 0.8rem;
+    margin-bottom: 1.2rem;
+  }
+  .form-group {
+    margin-bottom: 1.2rem;
+  }
+  label {
     font-weight: 500;
-    color: var(--text);
-    letter-spacing: 0.3px;
+    font-size: 0.8rem;
+    display: block;
+    margin-bottom: 0.3rem;
   }
   .req { color: var(--danger); }
   input, select, textarea {
+    width: 100%;
     padding: 0.7rem 1rem;
     border: 1.5px solid var(--border);
     border-radius: var(--radius-sm);
-    font-family: 'DM Sans', sans-serif;
+    font-family: inherit;
     font-size: 0.9rem;
-    color: var(--text);
-    background: #fafafa;
-    transition: border-color 0.2s, box-shadow 0.2s;
+    transition: 0.2s;
+    background: white;
+  }
+  input:focus, select:focus {
     outline: none;
-  }
-  input:focus, select:focus, textarea:focus {
     border-color: var(--wa-green);
-    box-shadow: 0 0 0 3px rgba(37,211,102,0.1);
-    background: #fff;
+    box-shadow: 0 0 0 3px rgba(37,211,102,0.15);
   }
-  textarea { resize: vertical; min-height: 80px; }
-  select { cursor: pointer; }
-
-  /* === RADIO/CHECKBOX GROUPS === */
-  .radio-group { display: flex; gap: 0.75rem; flex-wrap: wrap; }
-  .radio-option {
+  .radio-group, .checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: 6px;
+  }
+  .radio-option, .check-option {
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 0.55rem 1rem;
+    padding: 0.5rem 1rem;
     border: 1.5px solid var(--border);
-    border-radius: 30px;
-    cursor: pointer;
-    font-size: 0.85rem;
-    font-weight: 500;
-    transition: all 0.2s;
-    user-select: none;
-  }
-  .radio-option:hover { border-color: var(--wa-green); background: #f0fdf8; }
-  .radio-option.selected { border-color: var(--wa-green); background: #f0fdf8; color: var(--wa-dark); }
-  .radio-option input { display: none; }
-  .radio-dot {
-    width: 14px; height: 14px;
-    border-radius: 50%;
-    border: 2px solid var(--border);
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
-    transition: all 0.2s;
-  }
-  .radio-option.selected .radio-dot {
-    border-color: var(--wa-green);
-    background: var(--wa-green);
-  }
-  .radio-option.selected .radio-dot::after {
-    content: '';
-    width: 5px; height: 5px;
-    border-radius: 50%;
-    background: #fff;
-  }
-
-  .checkbox-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; }
-  .check-option {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 0.6rem 0.9rem;
-    border: 1.5px solid var(--border);
-    border-radius: var(--radius-sm);
-    cursor: pointer;
-    font-size: 0.85rem;
-    transition: all 0.2s;
-    user-select: none;
-  }
-  .check-option:hover { border-color: var(--wa-green); background: #f0fdf8; }
-  .check-option.checked { border-color: var(--wa-green); background: #f0fdf8; }
-  .check-box {
-    width: 18px; height: 18px;
-    border-radius: 5px;
-    border: 2px solid var(--border);
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
-    transition: all 0.2s;
-  }
-  .check-option.checked .check-box {
-    border-color: var(--wa-green);
-    background: var(--wa-green);
-  }
-  .check-option.checked .check-box::after {
-    content: '✓';
-    color: #fff;
-    font-size: 11px;
-    font-weight: 700;
-  }
-
-  /* === SOCIAL LINK INPUT === */
-  .social-input-wrap {
-    display: flex;
-    align-items: center;
-    border: 1.5px solid var(--border);
-    border-radius: var(--radius-sm);
-    overflow: hidden;
-    background: #fafafa;
-    transition: border-color 0.2s, box-shadow 0.2s;
-  }
-  .social-input-wrap:focus-within {
-    border-color: var(--wa-green);
-    box-shadow: 0 0 0 3px rgba(37,211,102,0.1);
-    background: #fff;
-  }
-  .social-prefix {
-    padding: 0.7rem 0.9rem;
-    background: #f0f4f8;
+    border-radius: 40px;
     font-size: 0.8rem;
-    color: var(--muted);
-    border-right: 1.5px solid var(--border);
-    white-space: nowrap;
-    font-weight: 500;
+    cursor: pointer;
+    background: white;
+    transition: all 0.2s;
   }
-  .social-input-wrap input {
-    border: none;
-    border-radius: 0;
-    background: transparent;
-    flex: 1;
-    box-shadow: none !important;
+  .radio-option.selected, .check-option.checked {
+    border-color: var(--wa-green);
+    background: #e6faf0;
   }
-  .social-input-wrap input:focus { outline: none; border: none; box-shadow: none; }
-
-  /* === BUTTONS === */
   .btn {
-    padding: 0.8rem 1.8rem;
-    border-radius: 30px;
+    padding: 0.8rem 1.5rem;
+    border-radius: 40px;
+    font-weight: 600;
     border: none;
     cursor: pointer;
-    font-family: 'DM Sans', sans-serif;
+    transition: 0.2s;
+    background: #eef2f6;
     font-size: 0.9rem;
-    font-weight: 600;
-    transition: all 0.2s;
   }
   .btn-primary {
-    background: linear-gradient(135deg, var(--wa-green), var(--wa-dark));
-    color: #fff;
-    box-shadow: 0 4px 14px rgba(37,211,102,0.35);
+    background: linear-gradient(100deg, var(--wa-green), var(--wa-dark));
+    color: white;
+    box-shadow: 0 6px 14px rgba(37,211,102,0.3);
   }
-  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(37,211,102,0.45); }
-  .btn-primary:active { transform: translateY(0); }
-  .btn-secondary {
-    background: #fff;
-    color: var(--text);
-    border: 1.5px solid var(--border);
-  }
-  .btn-secondary:hover { background: var(--bg); }
-  .btn-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 1.5rem;
-  }
-
-  /* === STEP SECTIONS === */
-  .step-section { display: none; }
-  .step-section.active { display: block; }
-
-  /* === VIOLATION SECTION === */
-  .violation-cards { display: grid; gap: 0.75rem; }
-  .violation-card {
-    border: 1.5px solid var(--border);
-    border-radius: var(--radius-sm);
-    padding: 1rem 1.2rem;
-    cursor: pointer;
-    transition: all 0.2s;
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-  }
-  .violation-card:hover { border-color: var(--danger); background: #fff5f5; }
-  .violation-card.selected { border-color: var(--danger); background: #fff5f5; }
-  .violation-icon {
-    width: 36px; height: 36px;
-    border-radius: 8px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 18px;
-    flex-shrink: 0;
-  }
-  .violation-card .v-title { font-weight: 600; font-size: 0.9rem; margin-bottom: 2px; }
-  .violation-card .v-desc { font-size: 0.8rem; color: var(--muted); }
-
-  /* === RESULTS === */
-  #results-section { display: none; }
+  .btn-primary:hover { transform: translateY(-2px); filter: brightness(1.02);}
+  .flex-between { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; margin-top: 0.8rem;}
   .result-header {
-    border-radius: var(--radius);
-    padding: 2rem;
-    margin-bottom: 1.5rem;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-  .result-eligible { background: linear-gradient(135deg, #064e3b, #065f46); }
-  .result-ineligible { background: linear-gradient(135deg, #7f1d1d, #991b1b); }
-  .result-partial { background: linear-gradient(135deg, #78350f, #92400e); }
-  .result-badge-icon {
-    width: 80px; height: 80px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.15);
-    display: flex; align-items: center; justify-content: center;
-    margin: 0 auto 1.2rem;
-    font-size: 2.5rem;
-  }
-  .result-header h2 {
-    font-family: 'Syne', sans-serif;
-    font-size: 1.6rem;
-    font-weight: 800;
-    color: #fff;
-    margin-bottom: 0.5rem;
-  }
-  .result-header p { color: rgba(255,255,255,0.8); font-size: 0.95rem; }
-
-  .score-bar-wrap {
-    background: var(--card);
-    border-radius: var(--radius);
-    padding: 1.5rem 2rem;
-    margin-bottom: 1.5rem;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-  }
-  .score-label {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 0.75rem;
-  }
-  .score-label span:first-child { font-weight: 600; font-size: 0.9rem; }
-  .score-value { font-size: 1.4rem; font-weight: 700; color: var(--wa-green); }
-  .bar-track {
-    height: 12px;
-    background: var(--bg);
-    border-radius: 20px;
-    overflow: hidden;
-  }
-  .bar-fill {
-    height: 100%;
-    border-radius: 20px;
-    background: linear-gradient(90deg, var(--wa-green), var(--wa-dark));
-    transition: width 1s cubic-bezier(0.4,0,0.2,1);
-  }
-
-  .criteria-list { display: grid; gap: 0.75rem; margin-bottom: 1.5rem; }
-  .criteria-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    background: var(--card);
-    border-radius: var(--radius-sm);
-    padding: 1rem 1.2rem;
-    box-shadow: 0 1px 6px rgba(0,0,0,0.04);
-  }
-  .criteria-dot {
-    width: 28px; height: 28px;
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 13px;
-    flex-shrink: 0;
-    margin-top: 1px;
-  }
-  .dot-pass { background: #d1fae5; color: var(--success); }
-  .dot-fail { background: #fee2e2; color: var(--danger); }
-  .dot-warn { background: #fef3c7; color: var(--warning); }
-  .criteria-text h4 { font-size: 0.9rem; font-weight: 600; margin-bottom: 3px; }
-  .criteria-text p { font-size: 0.82rem; color: var(--muted); line-height: 1.5; }
-  .criteria-text a { color: var(--info); text-decoration: none; }
-  .criteria-text a:hover { text-decoration: underline; }
-
-  .action-box {
-    background: var(--card);
-    border-radius: var(--radius);
-    padding: 1.5rem 2rem;
-    margin-bottom: 1rem;
-    border-left: 4px solid var(--info);
-    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-  }
-  .action-box.success-box { border-left-color: var(--success); }
-  .action-box.warning-box { border-left-color: var(--warning); }
-  .action-box.danger-box { border-left-color: var(--danger); }
-  .action-box h3 {
-    font-family: 'Syne', sans-serif;
-    font-size: 1rem;
-    font-weight: 700;
-    margin-bottom: 0.75rem;
-  }
-  .action-steps { list-style: none; padding: 0; }
-  .action-steps li {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    padding: 0.5rem 0;
-    font-size: 0.875rem;
-    line-height: 1.6;
-    border-bottom: 1px solid var(--border);
-  }
-  .action-steps li:last-child { border-bottom: none; }
-  .step-num-sm {
-    width: 22px; height: 22px;
-    border-radius: 50%;
-    background: var(--bg);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 11px;
-    font-weight: 700;
-    flex-shrink: 0;
-    color: var(--muted);
-  }
-
-  .restart-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    width: 100%;
-    padding: 1rem;
-    background: var(--card);
-    border: 2px solid var(--border);
-    border-radius: var(--radius);
-    cursor: pointer;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: var(--muted);
-    transition: all 0.2s;
-    margin-top: 1rem;
-  }
-  .restart-btn:hover { border-color: var(--wa-green); color: var(--wa-dark); background: #f0fdf8; }
-
-  /* === VIOLATION RESOLUTION === */
-  #violation-result { display: none; }
-  .violation-guide {
     background: var(--card);
     border-radius: var(--radius);
     padding: 1.5rem;
-    margin-bottom: 1rem;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    text-align: center;
+    margin-bottom: 1.5rem;
+    border-left: 6px solid;
   }
-
-  /* Progress dots */
-  .progress-dots {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    margin-bottom: 2rem;
+  .result-eligible { border-left-color: var(--success); background: #f0fdf4; }
+  .result-partial { border-left-color: var(--warning); background: #fffbeb; }
+  .result-ineligible { border-left-color: var(--danger); background: #fef2f2; }
+  .score-section {
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 1.2rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
   }
-  .prog-dot {
-    width: 8px; height: 8px;
-    border-radius: 50%;
+  .bar-track {
+    height: 12px;
     background: var(--border);
+    border-radius: 20px;
+    overflow: hidden;
+    margin: 0.6rem 0;
   }
-  .prog-dot.active { background: var(--wa-green); width: 24px; border-radius: 4px; }
-  .prog-dot.done { background: var(--success); }
-
-  /* Tooltip */
-  .hint {
-    font-size: 0.78rem;
-    color: var(--muted);
-    margin-top: 4px;
+  .bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--wa-green), var(--wa-dark));
+    width: 0%;
+    transition: width 0.8s ease;
+  }
+  .criteria-list {
     display: flex;
-    align-items: center;
-    gap: 5px;
+    flex-direction: column;
+    gap: 0.8rem;
+    margin-bottom: 1.5rem;
   }
-  .info-badge {
+  .criteria-item {
+    display: flex;
+    gap: 12px;
+    background: #fafdff;
+    border-radius: 14px;
+    padding: 0.9rem;
+    border: 1px solid var(--border);
+  }
+  .status-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 30px;
     display: inline-flex;
     align-items: center;
-    padding: 3px 10px;
-    background: #eff6ff;
-    color: var(--info);
+    justify-content: center;
+    font-weight: bold;
+  }
+  .action-box {
+    background: #f9fafb;
     border-radius: 20px;
-    font-size: 0.75rem;
+    padding: 1.3rem;
+    margin-top: 1rem;
+    border-left: 4px solid var(--info);
+  }
+  .restart-btn {
+    width: 100%;
+    background: white;
+    border: 2px solid var(--border);
+    padding: 1rem;
+    border-radius: 60px;
     font-weight: 600;
-    margin-left: 8px;
+    margin-top: 1rem;
+    cursor: pointer;
   }
-
-  @media (max-width: 600px) {
-    .form-grid { grid-template-columns: 1fr; }
-    .checkbox-grid { grid-template-columns: 1fr; }
-    .header h1 { font-size: 1.5rem; }
-    .steps-nav { flex-wrap: wrap; }
-    .step-pill { min-width: 80px; }
-    .card { padding: 1.25rem; }
-  }
+  .hidden { display: none; }
+  hr { margin: 1rem 0; border-color: var(--border); }
+  .badge-note { font-size: 0.75rem; background: #f1f5f9; padding: 8px 12px; border-radius: 20px; margin-top: 0.5rem; }
 </style>
 </head>
 <body>
-
-<div class="header">
-  <div class="badge-icon">
-    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-      <path d="M12.001 2C6.47813 2 2.00098 6.47715 2.00098 12C2.00098 17.5228 6.47813 22 12.001 22C17.5238 22 22.001 17.5228 22.001 12C22.001 6.47715 17.5238 2 12.001 2ZM16.7072 9.70711L11.7072 14.7071C11.3167 15.0976 10.6835 15.0976 10.293 14.7071L7.29297 11.7071C6.90244 11.3166 6.90244 10.6834 7.29297 10.2929C7.6835 9.90237 8.31666 9.90237 8.70719 10.2929L11.0001 12.5858L15.293 8.29289C15.6835 7.90237 16.3167 7.90237 16.7072 8.29289C17.0977 8.68342 17.0977 9.31658 16.7072 9.70711Z"/>
-    </svg>
-  </div>
+<div class="hero">
+  <div class="hero-icon"><svg viewBox="0 0 24 24" width="32"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z" fill="white"/></svg></div>
   <h1>WhatsApp Blue Badge Checker</h1>
-  <p>Find out if your business qualifies for the official WhatsApp verification badge</p>
+  <p>Official verification eligibility for <strong>Businesses</strong> & <strong>Individuals (creators, influencers, public figures)</strong></p>
 </div>
-
 <div class="container">
-
-  <!-- Progress dots -->
-  <div class="progress-dots" id="progressDots">
-    <div class="prog-dot active" id="pd1"></div>
-    <div class="prog-dot" id="pd2"></div>
-    <div class="prog-dot" id="pd3"></div>
-    <div class="prog-dot" id="pd4"></div>
-    <div class="prog-dot" id="pd5"></div>
+  <div class="entity-selector" id="entityToggle">
+    <div class="entity-btn active" data-type="business">🏢 Business / Brand</div>
+    <div class="entity-btn" data-type="individual">🌟 Individual (Creator / Influencer / Public Figure)</div>
   </div>
 
-  <!-- Steps nav -->
-  <div class="steps-nav" id="stepsNav">
-    <div class="step-pill active" onclick="goToStep(1)" id="sp1">
-      <div class="step-num">1</div>
-      <div class="step-label">Business Info</div>
-    </div>
-    <div class="step-pill" onclick="goToStep(2)" id="sp2">
-      <div class="step-num">2</div>
-      <div class="step-label">WA Account</div>
-    </div>
-    <div class="step-pill" onclick="goToStep(3)" id="sp3">
-      <div class="step-num">3</div>
-      <div class="step-label">Social Media</div>
-    </div>
-    <div class="step-pill" onclick="goToStep(4)" id="sp4">
-      <div class="step-num">4</div>
-      <div class="step-label">Notability</div>
-    </div>
-    <div class="step-pill" onclick="goToStep(5)" id="sp5">
-      <div class="step-num">5</div>
-      <div class="step-label">Issues</div>
-    </div>
-  </div>
-
-  <!-- STEP 1: Business Info -->
-  <div class="step-section active" id="step1">
+  <!-- BUSINESS FORM (original enhanced) -->
+  <div id="businessForm">
     <div class="card">
-      <div class="card-title">Business Information</div>
-      <div class="card-desc">Tell us about your business. This helps us assess your eligibility based on WhatsApp's authenticity requirements.</div>
-      <div class="form-grid">
-        <div class="form-group">
-          <label>Business Name <span class="req">*</span></label>
-          <input type="text" id="bizName" placeholder="e.g. Acme Corp" />
-        </div>
-        <div class="form-group">
-          <label>Industry / Category <span class="req">*</span></label>
-          <select id="bizCategory">
-            <option value="">Select category</option>
-            <option>Retail / E-commerce</option>
-            <option>Finance / Banking</option>
-            <option>Healthcare / Pharma</option>
-            <option>Technology / SaaS</option>
-            <option>Media / Entertainment</option>
-            <option>Hospitality / Travel</option>
-            <option>Education</option>
-            <option>NGO / Nonprofit</option>
-            <option>Government / Public Sector</option>
-            <option>Real Estate</option>
-            <option>Food & Beverage</option>
-            <option>Automotive</option>
-            <option>Fashion / Apparel</option>
-            <option>Other</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Business Type <span class="req">*</span></label>
-          <select id="bizType">
-            <option value="">Select type</option>
-            <option>Sole Proprietorship</option>
-            <option>Partnership</option>
-            <option>Private Limited Company</option>
-            <option>Public Limited Company</option>
-            <option>Corporation</option>
-            <option>NGO / Nonprofit</option>
-            <option>Government Body</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Country of Registration <span class="req">*</span></label>
-          <input type="text" id="bizCountry" placeholder="e.g. Pakistan" />
-        </div>
-        <div class="form-group full">
-          <label>Official Website</label>
-          <input type="url" id="bizWebsite" placeholder="https://yourbusiness.com" />
-          <span class="hint">ℹ️ Having an active official website strongly improves your chances</span>
-        </div>
-        <div class="form-group">
-          <label>Is your business legally registered? <span class="req">*</span></label>
-          <div class="radio-group" style="margin-top:4px">
-            <label class="radio-option" onclick="selectRadio(this,'bizLegal')">
-              <input type="radio" name="bizLegal" value="yes">
-              <div class="radio-dot"></div> Yes
-            </label>
-            <label class="radio-option" onclick="selectRadio(this,'bizLegal')">
-              <input type="radio" name="bizLegal" value="no">
-              <div class="radio-dot"></div> No
-            </label>
-          </div>
-        </div>
-        <div class="form-group">
-          <label>How many years in operation? <span class="req">*</span></label>
-          <select id="bizAge">
-            <option value="">Select</option>
-            <option value="0">Less than 1 year</option>
-            <option value="1">1–2 years</option>
-            <option value="3">3–5 years</option>
-            <option value="5">5+ years</option>
-            <option value="10">10+ years</option>
-          </select>
-        </div>
-      </div>
-    </div>
-    <div class="btn-row">
-      <span style="font-size:0.8rem;color:var(--muted)">Step 1 of 5</span>
-      <button class="btn btn-primary" onclick="nextStep(1)">Continue →</button>
+      <div class="card-title">📋 Business Information</div>
+      <div class="card-desc">Tell us about your company — WhatsApp requires authenticity and notability.</div>
+      <div class="form-group"><label>Business Name <span class="req">*</span></label><input type="text" id="bizName" placeholder="Acme Inc."></div>
+      <div class="form-group"><label>Industry <span class="req">*</span></label><select id="bizCategory"><option value="">Select</option><option>Retail</option><option>Tech</option><option>Finance</option><option>Healthcare</option><option>Media</option><option>Education</option><option>Other</option></select></div>
+      <div class="form-group"><label>Legal registration? <span class="req">*</span></label><div class="radio-group" id="bizLegalGroup"><div class="radio-option" data-val="yes">Yes</div><div class="radio-option" data-val="no">No</div></div></div>
+      <div class="form-group"><label>Website URL</label><input type="url" id="bizWebsite" placeholder="https://"></div>
+      <div class="form-group"><label>Years in operation</label><select id="bizAge"><option value="0"><1 year</option><option value="2">1-3 years</option><option value="4">3-5 years</option><option value="6">5+ years</option></select></div>
+      <div class="form-group"><label>WhatsApp account type <span class="req">*</span></label><div class="radio-group" id="waTypeGroup"><div class="radio-option" data-val="api">WhatsApp Business API</div><div class="radio-option" data-val="app">WhatsApp Business App</div><div class="radio-option" data-val="personal">Personal WhatsApp</div></div></div>
+      <div class="form-group"><label>Connected to Meta Business Manager?</label><div class="radio-group" id="metaBizGroup"><div class="radio-option" data-val="yes">Yes</div><div class="radio-option" data-val="no">No</div></div></div>
+      <div class="form-group"><label>Profile completeness (fields like logo, desc, hours)</label><div class="radio-group" id="profileComplete"><div class="radio-option" data-val="full">Fully complete (7-8 fields)</div><div class="radio-option" data-val="partial">Partial (4-6)</div><div class="radio-option" data-val="low">Low (<4)</div></div></div>
+      <div class="form-group"><label>Media mentions?</label><div class="radio-group" id="mediaGroup"><div class="radio-option" data-val="major">Major outlets</div><div class="radio-option" data-val="local">Local/regional</div><div class="radio-option" data-val="none">None</div></div></div>
+      <div class="form-group"><label>Total social followers (Facebook+IG+LinkedIn approx)</label><select id="socialFollowers"><option value="0"><1k</option><option value="1">1k-10k</option><option value="2">10k-50k</option><option value="3">50k-500k</option><option value="4">500k+</option></select></div>
+      <div class="form-group"><label>Facebook Page verified (blue tick)?</label><div class="radio-group" id="fbVerGroup"><div class="radio-option" data-val="yes">Yes</div><div class="radio-option" data-val="no">No</div></div></div>
+      <div class="form-group"><label>Wikipedia or industry awards?</label><div class="radio-group" id="notabilityGroup"><div class="radio-option" data-val="yes">Yes</div><div class="radio-option" data-val="no">No</div></div></div>
     </div>
   </div>
 
-  <!-- STEP 2: WhatsApp Account -->
-  <div class="step-section" id="step2">
+  <!-- INDIVIDUAL FORM (creator/influencer/public figure) -->
+  <div id="individualForm" class="hidden">
     <div class="card">
-      <div class="card-title">WhatsApp Business Account</div>
-      <div class="card-desc">WhatsApp requires businesses to have a properly set up Business account through the official API or app.</div>
-      <div class="form-grid">
-        <div class="form-group full">
-          <label>What type of WhatsApp account do you use? <span class="req">*</span></label>
-          <div class="radio-group" style="margin-top:4px">
-            <label class="radio-option" onclick="selectRadio(this,'waType')">
-              <input type="radio" name="waType" value="api">
-              <div class="radio-dot"></div> WhatsApp Business API
-            </label>
-            <label class="radio-option" onclick="selectRadio(this,'waType')">
-              <input type="radio" name="waType" value="app">
-              <div class="radio-dot"></div> WhatsApp Business App
-            </label>
-            <label class="radio-option" onclick="selectRadio(this,'waType')">
-              <input type="radio" name="waType" value="personal">
-              <div class="radio-dot"></div> Personal WhatsApp
-            </label>
-            <label class="radio-option" onclick="selectRadio(this,'waType')">
-              <input type="radio" name="waType" value="none">
-              <div class="radio-dot"></div> No WhatsApp Account
-            </label>
-          </div>
-        </div>
-        <div class="form-group full">
-          <label>What is set up on your WhatsApp Business profile? <span class="req">*</span></label>
-          <div class="checkbox-grid" style="margin-top:4px">
-            <label class="check-option" onclick="toggleCheck(this,'waProfile')">
-              <div class="check-box"></div> Business Name
-            </label>
-            <label class="check-option" onclick="toggleCheck(this,'waProfile')">
-              <div class="check-box"></div> Profile Photo / Logo
-            </label>
-            <label class="check-option" onclick="toggleCheck(this,'waProfile')">
-              <div class="check-box"></div> Business Description
-            </label>
-            <label class="check-option" onclick="toggleCheck(this,'waProfile')">
-              <div class="check-box"></div> Business Category
-            </label>
-            <label class="check-option" onclick="toggleCheck(this,'waProfile')">
-              <div class="check-box"></div> Business Address
-            </label>
-            <label class="check-option" onclick="toggleCheck(this,'waProfile')">
-              <div class="check-box"></div> Email Address
-            </label>
-            <label class="check-option" onclick="toggleCheck(this,'waProfile')">
-              <div class="check-box"></div> Website Link
-            </label>
-            <label class="check-option" onclick="toggleCheck(this,'waProfile')">
-              <div class="check-box"></div> Business Hours
-            </label>
-          </div>
-        </div>
-        <div class="form-group">
-          <label>Is your number verified / active? <span class="req">*</span></label>
-          <div class="radio-group" style="margin-top:4px">
-            <label class="radio-option" onclick="selectRadio(this,'waVerified')">
-              <input type="radio" name="waVerified" value="yes">
-              <div class="radio-dot"></div> Yes
-            </label>
-            <label class="radio-option" onclick="selectRadio(this,'waVerified')">
-              <input type="radio" name="waVerified" value="no">
-              <div class="radio-dot"></div> No
-            </label>
-          </div>
-        </div>
-        <div class="form-group">
-          <label>Is your business connected to Meta Business Manager?</label>
-          <div class="radio-group" style="margin-top:4px">
-            <label class="radio-option" onclick="selectRadio(this,'metaBiz')">
-              <input type="radio" name="metaBiz" value="yes">
-              <div class="radio-dot"></div> Yes
-            </label>
-            <label class="radio-option" onclick="selectRadio(this,'metaBiz')">
-              <input type="radio" name="metaBiz" value="no">
-              <div class="radio-dot"></div> No
-            </label>
-            <label class="radio-option" onclick="selectRadio(this,'metaBiz')">
-              <input type="radio" name="metaBiz" value="unsure">
-              <div class="radio-dot"></div> Not sure
-            </label>
-          </div>
-        </div>
-        <div class="form-group full">
-          <label>Have you already applied for the Blue Badge before?</label>
-          <div class="radio-group" style="margin-top:4px">
-            <label class="radio-option" onclick="selectRadio(this,'prevApply')">
-              <input type="radio" name="prevApply" value="never">
-              <div class="radio-dot"></div> Never applied
-            </label>
-            <label class="radio-option" onclick="selectRadio(this,'prevApply')">
-              <input type="radio" name="prevApply" value="rejected">
-              <div class="radio-dot"></div> Applied & Rejected
-            </label>
-            <label class="radio-option" onclick="selectRadio(this,'prevApply')">
-              <input type="radio" name="prevApply" value="pending">
-              <div class="radio-dot"></div> Application Pending
-            </label>
-            <label class="radio-option" onclick="selectRadio(this,'prevApply')">
-              <input type="radio" name="prevApply" value="eligible">
-              <div class="radio-dot"></div> Got the badge but no checkmark visible
-            </label>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="btn-row">
-      <button class="btn btn-secondary" onclick="prevStep(2)">← Back</button>
-      <button class="btn btn-primary" onclick="nextStep(2)">Continue →</button>
+      <div class="card-title">👤 Individual / Public Figure Profile</div>
+      <div class="card-desc">For creators, journalists, influencers, celebrities, and public figures. WhatsApp verification focuses on notability and authentic public presence.</div>
+      <div class="form-group"><label>Full Name / Stage Name <span class="req">*</span></label><input type="text" id="indName" placeholder="Alex Rivera"></div>
+      <div class="form-group"><label>Primary Category</label><select id="indCategory"><option value="">Select</option><option>Content Creator / Influencer</option><option>Journalist / Media Personality</option><option>Musician / Artist</option><option>Athlete / Sports</option><option>Public Figure / Politician</option><option>Activist / Thought Leader</option><option>Entrepreneur / Founder (individual)</option><option>Other</option></select></div>
+      <div class="form-group"><label>Official website / Linktree / Portfolio</label><input type="url" id="indWebsite" placeholder="https://"></div>
+      <div class="form-group"><label>WhatsApp Account type (must be personal for individuals - but verification path is different)</label><div class="radio-group" id="indWaType"><div class="radio-option" data-val="personal">Personal WhatsApp (primary use)</div><div class="radio-option" data-val="business">WhatsApp Business App</div></div></div>
+      <div class="form-group"><label>Are you widely known and searched online? (Notability)</label><div class="radio-group" id="indNotability"><div class="radio-option" data-val="high">High - Wikipedia page / major media features</div><div class="radio-option" data-val="medium">Moderate - local news, medium following</div><div class="radio-option" data-val="low">Low - minimal external recognition</div></div></div>
+      <div class="form-group"><label>Total social media following across platforms (IG, TikTok, X, YouTube)</label><select id="indFollowers"><option value="0"><5k</option><option value="1">5k-25k</option><option value="2">25k-100k</option><option value="3">100k-500k</option><option value="4">500k-1M</option><option value="5">1M+</option></select></div>
+      <div class="form-group"><label>Verified on any other platform? (Instagram, Twitter, TikTok, YouTube)</label><div class="radio-group" id="otherVerified"><div class="radio-option" data-val="multiple">Yes, 2+ platforms</div><div class="radio-option" data-val="one">Yes, one platform</div><div class="radio-option" data-val="none">No verification elsewhere</div></div></div>
+      <div class="form-group"><label>Media or press mentions (features / interviews)</label><div class="radio-group" id="indMedia"><div class="radio-option" data-val="national">National / International media</div><div class="radio-option" data-val="local">Local / Niche publications</div><div class="radio-option" data-val="none">No known press</div></div></div>
+      <div class="form-group"><label>Do you have a Wikipedia page or significant industry awards?</label><div class="radio-group" id="indWiki"><div class="radio-option" data-val="yes">Yes</div><div class="radio-option" data-val="no">No</div></div></div>
+      <div class="badge-note">⚠️ For individuals, WhatsApp verification (blue badge) is currently limited and mostly reserved for highly notable figures. Meta often prioritizes business accounts, but notable public personalities can apply via Meta Business Manager if they have a professional presence.</div>
     </div>
   </div>
 
-  <!-- STEP 3: Social Media -->
-  <div class="step-section" id="step3">
-    <div class="card">
-      <div class="card-title">Social Media Presence</div>
-      <div class="card-desc">WhatsApp considers your online presence across platforms to evaluate notability. Fill in what you have.</div>
-      <div class="form-grid">
-        <div class="form-group full">
-          <label>Facebook Page</label>
-          <div class="social-input-wrap">
-            <span class="social-prefix">facebook.com/</span>
-            <input type="text" id="smFacebook" placeholder="yourpage" />
-          </div>
-          <span class="hint">ℹ️ Should be a verified official business page (not personal)</span>
-        </div>
-        <div class="form-group full">
-          <label>Instagram Account</label>
-          <div class="social-input-wrap">
-            <span class="social-prefix">instagram.com/</span>
-            <input type="text" id="smInstagram" placeholder="youraccount" />
-          </div>
-        </div>
-        <div class="form-group full">
-          <label>Twitter / X Account</label>
-          <div class="social-input-wrap">
-            <span class="social-prefix">x.com/</span>
-            <input type="text" id="smTwitter" placeholder="youraccount" />
-          </div>
-        </div>
-        <div class="form-group full">
-          <label>LinkedIn Page</label>
-          <div class="social-input-wrap">
-            <span class="social-prefix">linkedin.com/company/</span>
-            <input type="text" id="smLinkedin" placeholder="yourcompany" />
-          </div>
-        </div>
-        <div class="form-group full">
-          <label>YouTube Channel</label>
-          <div class="social-input-wrap">
-            <span class="social-prefix">youtube.com/@</span>
-            <input type="text" id="smYoutube" placeholder="yourchannel" />
-          </div>
-        </div>
-        <div class="form-group">
-          <label>Is your Facebook Page verified (blue tick)?</label>
-          <div class="radio-group" style="margin-top:4px">
-            <label class="radio-option" onclick="selectRadio(this,'fbVerified')">
-              <input type="radio" name="fbVerified" value="yes">
-              <div class="radio-dot"></div> Yes
-            </label>
-            <label class="radio-option" onclick="selectRadio(this,'fbVerified')">
-              <input type="radio" name="fbVerified" value="no">
-              <div class="radio-dot"></div> No
-            </label>
-            <label class="radio-option" onclick="selectRadio(this,'fbVerified')">
-              <input type="radio" name="fbVerified" value="na">
-              <div class="radio-dot"></div> No FB page
-            </label>
-          </div>
-        </div>
-        <div class="form-group">
-          <label>Is your Instagram verified?</label>
-          <div class="radio-group" style="margin-top:4px">
-            <label class="radio-option" onclick="selectRadio(this,'igVerified')">
-              <input type="radio" name="igVerified" value="yes">
-              <div class="radio-dot"></div> Yes
-            </label>
-            <label class="radio-option" onclick="selectRadio(this,'igVerified')">
-              <input type="radio" name="igVerified" value="no">
-              <div class="radio-dot"></div> No
-            </label>
-            <label class="radio-option" onclick="selectRadio(this,'igVerified')">
-              <input type="radio" name="igVerified" value="na">
-              <div class="radio-dot"></div> No IG
-            </label>
-          </div>
-        </div>
-        <div class="form-group full">
-          <label>Total combined social media followers (approx)</label>
-          <select id="smFollowers">
-            <option value="">Select range</option>
-            <option value="0">Under 1,000</option>
-            <option value="1">1,000 – 10,000</option>
-            <option value="2">10,000 – 50,000</option>
-            <option value="3">50,000 – 500,000</option>
-            <option value="4">500,000 – 1 million</option>
-            <option value="5">1 million+</option>
-          </select>
-        </div>
-      </div>
-    </div>
-    <div class="btn-row">
-      <button class="btn btn-secondary" onclick="prevStep(3)">← Back</button>
-      <button class="btn btn-primary" onclick="nextStep(3)">Continue →</button>
-    </div>
+  <button class="btn btn-primary" style="width:100%" id="analyzeBtn">🔍 Check Eligibility & Get Roadmap</button>
+
+  <!-- RESULTS PANEL -->
+  <div id="resultsPanel" class="hidden" style="margin-top: 1.5rem;">
+    <div id="resultHeader"></div>
+    <div class="score-section"><div>📊 Eligibility Score</div><div class="bar-track"><div class="bar-fill" id="scoreFill"></div></div><div><span id="scoreValue">0</span>%</div></div>
+    <div id="criteriaList"></div>
+    <div id="actionPlan"></div>
+    <button class="restart-btn" id="restartBtn">⟳ Start Over — Check Another Profile</button>
   </div>
-
-  <!-- STEP 4: Notability -->
-  <div class="step-section" id="step4">
-    <div class="card">
-      <div class="card-title">Notability & Brand Recognition</div>
-      <div class="card-desc">WhatsApp wants to verify that your business is notable — meaning it's well-known and recognized in its industry or region.</div>
-      <div class="form-grid">
-        <div class="form-group full">
-          <label>Has your business been mentioned in news or media? <span class="req">*</span></label>
-          <div class="radio-group" style="margin-top:4px">
-            <label class="radio-option" onclick="selectRadio(this,'mediaPress')">
-              <input type="radio" name="mediaPress" value="major">
-              <div class="radio-dot"></div> Yes – major outlets
-            </label>
-            <label class="radio-option" onclick="selectRadio(this,'mediaPress')">
-              <input type="radio" name="mediaPress" value="local">
-              <div class="radio-dot"></div> Yes – local/regional
-            </label>
-            <label class="radio-option" onclick="selectRadio(this,'mediaPress')">
-              <input type="radio" name="mediaPress" value="no">
-              <div class="radio-dot"></div> No coverage
-            </label>
-          </div>
-        </div>
-        <div class="form-group full">
-          <label>Which of the following apply to your brand? (select all)</label>
-          <div class="checkbox-grid" style="margin-top:4px">
-            <label class="check-option" onclick="toggleCheck(this,'notability')">
-              <div class="check-box"></div> Listed on Wikipedia
-            </label>
-            <label class="check-option" onclick="toggleCheck(this,'notability')">
-              <div class="check-box"></div> Verified on other platforms
-            </label>
-            <label class="check-option" onclick="toggleCheck(this,'notability')">
-              <div class="check-box"></div> Brand searched on Google frequently
-            </label>
-            <label class="check-option" onclick="toggleCheck(this,'notability')">
-              <div class="check-box"></div> Industry awards / recognitions
-            </label>
-            <label class="check-option" onclick="toggleCheck(this,'notability')">
-              <div class="check-box"></div> Government / regulatory body listed
-            </label>
-            <label class="check-option" onclick="toggleCheck(this,'notability')">
-              <div class="check-box"></div> International operations
-            </label>
-          </div>
-        </div>
-        <div class="form-group full">
-          <label>How would you describe your brand reach?</label>
-          <div class="radio-group" style="margin-top:4px">
-            <label class="radio-option" onclick="selectRadio(this,'brandReach')">
-              <input type="radio" name="brandReach" value="local">
-              <div class="radio-dot"></div> Local / City
-            </label>
-            <label class="radio-option" onclick="selectRadio(this,'brandReach')">
-              <input type="radio" name="brandReach" value="national">
-              <div class="radio-dot"></div> National
-            </label>
-            <label class="radio-option" onclick="selectRadio(this,'brandReach')">
-              <input type="radio" name="brandReach" value="regional">
-              <div class="radio-dot"></div> Multi-country / Regional
-            </label>
-            <label class="radio-option" onclick="selectRadio(this,'brandReach')">
-              <input type="radio" name="brandReach" value="global">
-              <div class="radio-dot"></div> Global
-            </label>
-          </div>
-        </div>
-        <div class="form-group full">
-          <label>Does your business have Google My Business or a Knowledge Panel?</label>
-          <div class="radio-group" style="margin-top:4px">
-            <label class="radio-option" onclick="selectRadio(this,'googlePanel')">
-              <input type="radio" name="googlePanel" value="both">
-              <div class="radio-dot"></div> Yes – both
-            </label>
-            <label class="radio-option" onclick="selectRadio(this,'googlePanel')">
-              <input type="radio" name="googlePanel" value="gmb">
-              <div class="radio-dot"></div> Google My Business only
-            </label>
-            <label class="radio-option" onclick="selectRadio(this,'googlePanel')">
-              <input type="radio" name="googlePanel" value="no">
-              <div class="radio-dot"></div> Neither
-            </label>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="btn-row">
-      <button class="btn btn-secondary" onclick="prevStep(4)">← Back</button>
-      <button class="btn btn-primary" onclick="nextStep(4)">Continue →</button>
-    </div>
-  </div>
-
-  <!-- STEP 5: Issues -->
-  <div class="step-section" id="step5">
-    <div class="card">
-      <div class="card-title">Any Issues or Violations?</div>
-      <div class="card-desc">If you're facing any specific problems with your WhatsApp account or application, select the relevant scenario below so we can give you the exact resolution steps.</div>
-
-      <div style="font-size:0.85rem;font-weight:600;color:var(--muted);margin-bottom:0.75rem;letter-spacing:0.5px;text-transform:uppercase">Current Problem (if any)</div>
-      <div class="violation-cards">
-        <div class="violation-card" onclick="selectViolation(this,'none')" id="vc_none">
-          <div class="violation-icon" style="background:#f0fdf8">✅</div>
-          <div>
-            <div class="v-title">No issues — just checking eligibility</div>
-            <div class="v-desc">I want to know if I qualify and how to apply</div>
-          </div>
-        </div>
-        <div class="violation-card" onclick="selectViolation(this,'nobadge')" id="vc_nobadge">
-          <div class="violation-icon" style="background:#eff6ff">💙</div>
-          <div>
-            <div class="v-title">Eligible but badge not visible in app</div>
-            <div class="v-desc">I got approved but no blue checkmark appears on my account</div>
-          </div>
-        </div>
-        <div class="violation-card" onclick="selectViolation(this,'spam')" id="vc_spam">
-          <div class="violation-icon" style="background:#fff7ed">⚠️</div>
-          <div>
-            <div class="v-title">Account flagged for spam / mass messaging</div>
-            <div class="v-desc">My account was restricted or limited due to spam reports</div>
-          </div>
-        </div>
-        <div class="violation-card" onclick="selectViolation(this,'policy')" id="vc_policy">
-          <div class="violation-icon" style="background:#fff5f5">🚫</div>
-          <div>
-            <div class="v-title">Policy violation / account banned</div>
-            <div class="v-desc">My account or business was suspended due to terms violation</div>
-          </div>
-        </div>
-        <div class="violation-card" onclick="selectViolation(this,'impersonation')" id="vc_impersonation">
-          <div class="violation-icon" style="background:#fdf4ff">👤</div>
-          <div>
-            <div class="v-title">Impersonation or identity issue</div>
-            <div class="v-desc">Someone is impersonating my business, or my identity was flagged</div>
-          </div>
-        </div>
-        <div class="violation-card" onclick="selectViolation(this,'rejected')" id="vc_rejected">
-          <div class="violation-icon" style="background:#fff7ed">❌</div>
-          <div>
-            <div class="v-title">Badge application rejected</div>
-            <div class="v-desc">I applied for the badge but was rejected without clear reason</div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="btn-row">
-      <button class="btn btn-secondary" onclick="prevStep(5)">← Back</button>
-      <button class="btn btn-primary" onclick="analyzeEligibility()">🔍 Analyze My Eligibility</button>
-    </div>
-  </div>
-
-  <!-- RESULTS -->
-  <div id="results-section">
-    <div id="result-header-div"></div>
-    <div class="score-bar-wrap">
-      <div class="score-label">
-        <span>Eligibility Score</span>
-        <span class="score-value" id="scoreText">0%</span>
-      </div>
-      <div class="bar-track">
-        <div class="bar-fill" id="scoreBar" style="width:0%"></div>
-      </div>
-    </div>
-    <div id="criteria-output"></div>
-    <div id="action-output"></div>
-    <div id="violation-output"></div>
-    <button class="restart-btn" onclick="restart()">↺ Start Over — Check Another Business</button>
-  </div>
-
 </div>
 
 <script>
-let currentStep = 1;
-let selectedViolation = 'none';
-let formData = {};
-
-function selectRadio(el, name) {
-  document.querySelectorAll(`[name="${name}"]`).forEach(r => {
-    r.closest('.radio-option').classList.remove('selected');
+  // ----- helper functions for UI -----
+  let entityType = "business"; // business or individual
+  const entityBtns = document.querySelectorAll(".entity-btn");
+  const businessDiv = document.getElementById("businessForm");
+  const individualDiv = document.getElementById("individualForm");
+  
+  entityBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+      entityBtns.forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      entityType = btn.getAttribute("data-type");
+      if (entityType === "business") {
+        businessDiv.classList.remove("hidden");
+        individualDiv.classList.add("hidden");
+      } else {
+        businessDiv.classList.add("hidden");
+        individualDiv.classList.remove("hidden");
+      }
+      document.getElementById("resultsPanel").classList.add("hidden");
+    });
   });
-  el.classList.add('selected');
-}
 
-function toggleCheck(el) {
-  el.classList.toggle('checked');
-}
-
-function getChecked(className) {
-  return [...document.querySelectorAll(`.check-option.${className === 'waProfile' ? '' : ''}checked`)].map(e => e.textContent.trim());
-}
-
-function getCheckedByGroup(groupName) {
-  const cards = document.querySelectorAll('.check-option.checked');
-  return [...cards].map(c => c.textContent.trim());
-}
-
-function getRadioVal(name) {
-  const el = document.querySelector(`[name="${name}"].selected input`);
-  return el ? el.value : null;
-}
-
-function selectViolation(el, type) {
-  document.querySelectorAll('.violation-card').forEach(c => c.classList.remove('selected'));
-  el.classList.add('selected');
-  selectedViolation = type;
-}
-
-function goToStep(n) {
-  if (n > currentStep) return;
-  showStep(n);
-}
-
-function nextStep(current) {
-  if (current === 1) {
-    if (!document.getElementById('bizName').value.trim() ||
-        !document.getElementById('bizCategory').value ||
-        !document.getElementById('bizType').value ||
-        !document.getElementById('bizCountry').value.trim() ||
-        !getRadioVal('bizLegal') ||
-        !document.getElementById('bizAge').value) {
-      alert('Please fill in all required fields before continuing.');
-      return;
+  // Generic radio group handler
+  function initRadioGroups() {
+    document.querySelectorAll(".radio-group").forEach(group => {
+      group.querySelectorAll(".radio-option").forEach(opt => {
+        opt.removeEventListener("click", radioHandler);
+        opt.addEventListener("click", radioHandler);
+      });
+    });
+  }
+  function radioHandler(e) {
+    const parent = this.closest(".radio-group");
+    if (parent) {
+      parent.querySelectorAll(".radio-option").forEach(opt => opt.classList.remove("selected"));
+      this.classList.add("selected");
     }
   }
-  if (current === 2) {
-    if (!getRadioVal('waType') || !getRadioVal('waVerified')) {
-      alert('Please answer all required questions.');
-      return;
+  function getRadioVal(groupId) {
+    const group = document.getElementById(groupId);
+    if (!group) return null;
+    const selected = group.querySelector(".radio-option.selected");
+    return selected ? selected.getAttribute("data-val") : null;
+  }
+  function getSelectVal(id) { return document.getElementById(id)?.value; }
+  function getInputVal(id) { return document.getElementById(id)?.value.trim(); }
+
+  initRadioGroups();
+
+  // ANALYSIS
+  document.getElementById("analyzeBtn").addEventListener("click", () => {
+    if (entityType === "business") analyzeBusiness();
+    else analyzeIndividual();
+  });
+  document.getElementById("restartBtn")?.addEventListener("click", () => location.reload());
+
+  function analyzeBusiness() {
+    let score = 0;
+    const criteria = [];
+    // 1. WhatsApp API
+    const waType = getRadioVal("waTypeGroup");
+    if (waType === "api") { score += 22; criteria.push({status:"pass", title:"WhatsApp Business API", desc:"Official API account — mandatory for badge eligibility."});}
+    else if (waType === "app") { score += 8; criteria.push({status:"warn", title:"WhatsApp Business App", desc:"Blue badge requires API. Migrate to API via BSP."});}
+    else { score += 0; criteria.push({status:"fail", title:"Personal WhatsApp", desc:"Not eligible. Create WhatsApp Business API account."});}
+    // 2. Meta Business Manager
+    const metaBiz = getRadioVal("metaBizGroup");
+    if (metaBiz === "yes") { score += 12; criteria.push({status:"pass", title:"Meta Business Manager", desc:"Connected — necessary for application."});}
+    else { criteria.push({status:"fail", title:"No Meta Business Manager", desc:"Connect your number at business.facebook.com"});}
+    // 3. Profile completeness
+    const profile = getRadioVal("profileComplete");
+    if (profile === "full") { score += 12; criteria.push({status:"pass", title:"Complete Business Profile", desc:"All fields filled, great!"});}
+    else if (profile === "partial") { score += 5; criteria.push({status:"warn", title:"Incomplete profile", desc:"Add logo, description, hours, website."});}
+    else { criteria.push({status:"fail", title:"Bare profile", desc:"Fill all business profile fields."});}
+    // 4. Legal registration
+    const legal = getRadioVal("bizLegalGroup");
+    if (legal === "yes") { score += 8; criteria.push({status:"pass", title:"Legally registered", desc:"Authenticity requirement met."});}
+    else { criteria.push({status:"fail", title:"Not registered", desc:"Register your business legally."});}
+    // 5. Website
+    const website = getInputVal("bizWebsite");
+    if (website) { score += 6; criteria.push({status:"pass", title:"Official website", desc:"Strong signal."});}
+    else { criteria.push({status:"warn", title:"Missing website", desc:"Create a professional website."});}
+    // 6. Media mentions
+    const media = getRadioVal("mediaGroup");
+    if (media === "major") { score += 12; criteria.push({status:"pass", title:"Major media coverage", desc:"Excellent notability."});}
+    else if (media === "local") { score += 5; criteria.push({status:"warn", title:"Local press only", desc:"Seek national coverage."});}
+    else { criteria.push({status:"fail", title:"No press mentions", desc:"Get PR or media features."});}
+    // 7. Social followers
+    const followers = parseInt(getSelectVal("socialFollowers") || "0");
+    if (followers >= 3) { score += 10; criteria.push({status:"pass", title:"Large social following (50k+)", desc:"Strong brand reach."});}
+    else if (followers >= 2) { score += 5; criteria.push({status:"warn", title:"Moderate following (10k-50k)", desc:"Grow your audience."});}
+    else { criteria.push({status:"fail", title:"Low social reach", desc:"Build follower count on FB/IG/LinkedIn."});}
+    // 8. FB verified
+    const fbVer = getRadioVal("fbVerGroup");
+    if (fbVer === "yes") { score += 10; criteria.push({status:"pass", title:"Facebook verified", desc:"Meta trust signal."});}
+    else { criteria.push({status:"warn", title:"Facebook not verified", desc:"Apply for Meta verification."});}
+    // 9. Notability signals
+    const notable = getRadioVal("notabilityGroup");
+    if (notable === "yes") { score += 8; criteria.push({status:"pass", title:"Wikipedia/awards", desc:"Strong notability."});}
+    else { criteria.push({status:"warn", title:"Missing notable mentions", desc:"Get listed in reputable directories."});}
+    // final verdict
+    const finalScore = Math.min(score, 100);
+    renderResults(finalScore, criteria, "business");
+  }
+
+  function analyzeIndividual() {
+    let score = 0;
+    const criteria = [];
+    const name = getInputVal("indName");
+    const category = getSelectVal("indCategory");
+    const waTypeInd = getRadioVal("indWaType");
+    const notabilityLevel = getRadioVal("indNotability");
+    const followersVal = parseInt(getSelectVal("indFollowers") || "0");
+    const otherVerification = getRadioVal("otherVerified");
+    const mediaLevel = getRadioVal("indMedia");
+    const hasWiki = getRadioVal("indWiki");
+    
+    // 1. WhatsApp account type (individuals use personal but must go through Meta business manager route)
+    if (waTypeInd === "personal") { score += 5; criteria.push({status:"pass", title:"Personal WhatsApp account", desc:"For individuals, you still need Meta Business Manager setup (you can create a Business Manager ID)."});}
+    else { score += 2; criteria.push({status:"info", title:"WhatsApp Business App", desc:"Works for individuals, but process is similar."});}
+    
+    // 2. Notability strength
+    if (notabilityLevel === "high") { score += 30; criteria.push({status:"pass", title:"High notability (Wiki / major features)", desc:"WhatsApp often verifies notable public figures."});}
+    else if (notabilityLevel === "medium") { score += 15; criteria.push({status:"warn", title:"Moderate recognition", desc:"Grow your press footprint to increase chances."});}
+    else { score += 0; criteria.push({status:"fail", title:"Low public recognition", desc:"Verification unlikely until you gain wider fame."});}
+    
+    // 3. Followers (individuals)
+    if (followersVal >= 4) { score += 20; criteria.push({status:"pass", title:"Massive following (500k+)", desc:"Strong audience reach."});}
+    else if (followersVal >= 3) { score += 12; criteria.push({status:"pass", title:"Large following (100k-500k)", desc:"Good signal."});}
+    else if (followersVal >= 2) { score += 6; criteria.push({status:"warn", title:"Moderate following (25k-100k)", desc:"Build more to stand out."});}
+    else { criteria.push({status:"fail", title:"Small following (<25k)", desc:"Focus on audience growth and external PR."});}
+    
+    // 4. Verified on other platforms
+    if (otherVerification === "multiple") { score += 18; criteria.push({status:"pass", title:"Verified on 2+ platforms", desc:"Meta sees cross-platform verification as trust."});}
+    else if (otherVerification === "one") { score += 8; criteria.push({status:"warn", title:"Verified on one platform", desc:"Get verified on Instagram or Twitter first."});}
+    else { criteria.push({status:"fail", title:"No verification elsewhere", desc:"Apply for Instagram/Facebook verification before WhatsApp."});}
+    
+    // 5. Media mentions
+    if (mediaLevel === "national") { score += 15; criteria.push({status:"pass", title:"National/international press", desc:"High credibility."});}
+    else if (mediaLevel === "local") { score += 5; criteria.push({status:"warn", title:"Local press only", desc:"Seek larger outlets."});}
+    else { criteria.push({status:"fail", title:"No press mentions", desc:"Start pitching stories to relevant publications."});}
+    
+    // 6. Wikipedia/awards
+    if (hasWiki === "yes") { score += 12; criteria.push({status:"pass", title:"Wikipedia or major award", desc:"Top-tier notability factor."});}
+    else { criteria.push({status:"warn", title:"No Wikipedia page / major awards", desc:"Consider building a credible Wikipedia draft if eligible."});}
+    
+    const finalScore = Math.min(score, 100);
+    renderResults(finalScore, criteria, "individual");
+  }
+
+  function renderResults(score, criteriaArray, type) {
+    const resultsDiv = document.getElementById("resultsPanel");
+    const headerDiv = document.getElementById("resultHeader");
+    const criteriaContainer = document.getElementById("criteriaList");
+    const actionContainer = document.getElementById("actionPlan");
+    const scoreFill = document.getElementById("scoreFill");
+    const scoreSpan = document.getElementById("scoreValue");
+    
+    let verdictClass = "result-ineligible";
+    let verdictTitle = "Not Yet Eligible";
+    let verdictMsg = "";
+    if (score >= 70) { verdictClass = "result-eligible"; verdictTitle = "✅ Highly Eligible — You're ready to apply!"; verdictMsg = "Your profile meets the core WhatsApp verification standards."; }
+    else if (score >= 45) { verdictClass = "result-partial"; verdictTitle = "⚡ Partially Eligible — Needs Improvement"; verdictMsg = "You have some strengths but missing key requirements."; }
+    else { verdictClass = "result-ineligible"; verdictTitle = "❌ Currently Ineligible"; verdictMsg = "Focus on the action steps below before applying."; }
+    
+    headerDiv.innerHTML = `<div class="result-header ${verdictClass}"><h3>${verdictTitle}</h3><p>${verdictMsg}</p><div style="font-size:0.8rem; margin-top:8px;">Eligibility Score: ${score}%</div></div>`;
+    let criteriaHtml = `<div class="criteria-list">`;
+    criteriaArray.forEach(c => {
+      let icon = c.status === "pass" ? "✅" : (c.status === "fail" ? "❌" : "⚠️");
+      let bgColor = c.status === "pass" ? "#e0f2fe" : (c.status === "fail" ? "#fee2e2" : "#fef9c3");
+      criteriaHtml += `<div class="criteria-item"><div class="status-icon" style="background:${bgColor};">${icon}</div><div><strong>${c.title}</strong><div style="font-size:0.8rem; color:#334155;">${c.desc}</div></div></div>`;
+    });
+    criteriaHtml += `</div>`;
+    criteriaContainer.innerHTML = criteriaHtml;
+    
+    // Action plan
+    let actionHtml = `<div class="action-box"><strong>📌 Custom roadmap for ${type === "business" ? "businesses" : "individuals"}</strong><ul style="margin-top:10px; list-style:none; padding-left:0;">`;
+    if (type === "business") {
+      actionHtml += `<li>🔹 <strong>Switch to WhatsApp Business API</strong> via a Meta BSP (360dialog, Twilio, MessageBird).</li>
+      <li>🔹 Connect your number to <strong>Meta Business Manager</strong> and submit verification documents (business license, website).</li>
+      <li>🔹 Fill out 100% of your WhatsApp Business Profile (logo, description, address, email, hours).</li>
+      <li>🔹 Get press mentions in at least local news, aim for industry publications.</li>
+      <li>🔹 Apply for Facebook Page verification (blue tick) first, then request official business account via Meta Business Suite.</li>
+      <li>🔹 Official application: <strong>Meta Business Manager → WhatsApp Manager → Phone Numbers → Request Official Business Account</strong>.</li>`;
+    } else {
+      actionHtml += `<li>🔹 <strong>For individual creators/public figures:</strong> You need to apply using Meta Business Manager even for personal brand.</li>
+      <li>🔹 First get verified on <strong>Instagram or Facebook</strong> — Meta prioritizes cross-platform verified profiles.</li>
+      <li>🔹 Build a strong digital footprint: Wikipedia page, interviews, high-authority backlinks.</li>
+      <li>🔹 Use the same email/domain across socials and your website.</li>
+      <li>🔹 Submit request: Go to <strong>business.facebook.com</strong> → create Business Portfolio → add your WhatsApp number (personal) → Request verification under “Official Business Account”.</li>
+      <li>🔹 Note: WhatsApp blue badge for individuals is extremely rare; you need major notability (celebrities, high-profile journalists). If your score is below 60, focus on building external recognition first.</li>`;
     }
+    actionHtml += `</ul></div>`;
+    if (score < 50) {
+      actionHtml += `<div class="action-box" style="border-left-color:#f97316;"><strong>⚠️ Priority improvements:</strong> Increase social following, media mentions, and complete verification on other Meta platforms. Re-check after 3 months.</div>`;
+    } else if (score >= 70) {
+      actionHtml += `<div class="action-box" style="border-left-color:#10b981;"><strong>✨ Next step:</strong> Visit <a href="https://business.whatsapp.com" target="_blank">WhatsApp Business Manager</a> → Request Official Business Account. Provide accurate documentation. Good luck!</div>`;
+    }
+    actionContainer.innerHTML = actionHtml;
+    scoreFill.style.width = `${score}%`;
+    scoreSpan.innerText = score;
+    resultsDiv.classList.remove("hidden");
+    window.scrollTo({ top: document.querySelector("#resultsPanel").offsetTop - 20, behavior: "smooth" });
   }
-  showStep(current + 1);
-}
-
-function prevStep(current) {
-  showStep(current - 1);
-}
-
-function showStep(n) {
-  document.querySelectorAll('.step-section').forEach(s => s.classList.remove('active'));
-  document.getElementById(`step${n}`).classList.add('active');
-  document.querySelectorAll('.step-pill').forEach((p, i) => {
-    p.classList.remove('active', 'done');
-    if (i + 1 === n) p.classList.add('active');
-    if (i + 1 < n) p.classList.add('done');
+  // init radio groups after dynamic
+  document.querySelectorAll(".radio-group").forEach(g => {
+    g.querySelectorAll(".radio-option").forEach(opt => {
+      opt.addEventListener("click", function() { g.querySelectorAll(".radio-option").forEach(o => o.classList.remove("selected")); this.classList.add("selected"); });
+    });
   });
-  document.querySelectorAll('.prog-dot').forEach((d, i) => {
-    d.classList.remove('active', 'done');
-    if (i + 1 === n) d.classList.add('active');
-    if (i + 1 < n) d.classList.add('done');
-  });
-  currentStep = n;
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-function analyzeEligibility() {
-  if (!selectedViolation) {
-    alert('Please select a current situation from the list above.');
-    return;
-  }
-
-  const d = {
-    bizName: document.getElementById('bizName').value.trim(),
-    bizCategory: document.getElementById('bizCategory').value,
-    bizType: document.getElementById('bizType').value,
-    bizCountry: document.getElementById('bizCountry').value.trim(),
-    bizWebsite: document.getElementById('bizWebsite').value.trim(),
-    bizLegal: getRadioVal('bizLegal'),
-    bizAge: document.getElementById('bizAge').value,
-    waType: getRadioVal('waType'),
-    waVerified: getRadioVal('waVerified'),
-    metaBiz: getRadioVal('metaBiz'),
-    prevApply: getRadioVal('prevApply'),
-    waProfileItems: [...document.querySelectorAll('#step2 .check-option.checked')].length,
-    fbPage: document.getElementById('smFacebook').value.trim(),
-    igPage: document.getElementById('smInstagram').value.trim(),
-    twPage: document.getElementById('smTwitter').value.trim(),
-    liPage: document.getElementById('smLinkedin').value.trim(),
-    ytPage: document.getElementById('smYoutube').value.trim(),
-    fbVerified: getRadioVal('fbVerified'),
-    igVerified: getRadioVal('igVerified'),
-    smFollowers: document.getElementById('smFollowers').value,
-    mediaPress: getRadioVal('mediaPress'),
-    notabilityItems: [...document.querySelectorAll('#step4 .check-option.checked')].length,
-    brandReach: getRadioVal('brandReach'),
-    googlePanel: getRadioVal('googlePanel'),
-    violation: selectedViolation
-  };
-
-  // === SCORING ===
-  let score = 0;
-  let criteria = [];
-
-  // 1. WhatsApp Account Type
-  if (d.waType === 'api') {
-    score += 20;
-    criteria.push({ status: 'pass', title: 'WhatsApp Business API', desc: 'You are using the WhatsApp Business API — this is the required account type to apply for the Blue Badge. ✔' });
-  } else if (d.waType === 'app') {
-    score += 8;
-    criteria.push({ status: 'warn', title: 'WhatsApp Business App (not API)', desc: 'The Blue Badge is only available via the <strong>WhatsApp Business API</strong>. You need to migrate to the API through a Business Service Provider (BSP) like Twilio, 360dialog, or Meta directly. <a href="https://business.whatsapp.com" target="_blank">Apply here →</a>' });
-  } else if (d.waType === 'personal' || d.waType === 'none') {
-    score += 0;
-    criteria.push({ status: 'fail', title: 'No WhatsApp Business Account', desc: 'You must create a <strong>WhatsApp Business API account</strong> before applying. Personal WhatsApp accounts are not eligible. Start at <a href="https://business.whatsapp.com" target="_blank">business.whatsapp.com</a>' });
-  }
-
-  // 2. Meta Business Manager
-  if (d.metaBiz === 'yes') {
-    score += 10;
-    criteria.push({ status: 'pass', title: 'Meta Business Manager Connected', desc: 'Your account is connected to Meta Business Manager — a required step for badge application. ✔' });
-  } else {
-    score += 0;
-    criteria.push({ status: 'fail', title: 'Meta Business Manager Not Connected', desc: 'You must connect your WhatsApp Business Account to <strong>Meta Business Manager</strong> at <a href="https://business.facebook.com" target="_blank">business.facebook.com</a>. This is mandatory for badge applications.' });
-  }
-
-  // 3. Profile completeness
-  if (d.waProfileItems >= 7) {
-    score += 10;
-    criteria.push({ status: 'pass', title: 'Business Profile Fully Complete', desc: `Your WhatsApp Business profile has ${d.waProfileItems}/8 fields filled — excellent! A complete profile is required for verification. ✔` });
-  } else if (d.waProfileItems >= 4) {
-    score += 5;
-    criteria.push({ status: 'warn', title: `Profile Partially Complete (${d.waProfileItems}/8 fields)`, desc: 'Fill in all profile fields: business name, photo, description, category, address, email, website, and hours. Incomplete profiles are often rejected.' });
-  } else {
-    score += 0;
-    criteria.push({ status: 'fail', title: `Profile Incomplete (${d.waProfileItems}/8 fields)`, desc: 'Your WhatsApp Business profile needs to be fully completed before applying. Missing: name, photo, description, category, address, email, website, hours.' });
-  }
-
-  // 4. Legal registration
-  if (d.bizLegal === 'yes') {
-    score += 10;
-    criteria.push({ status: 'pass', title: 'Legally Registered Business', desc: 'WhatsApp requires businesses to be authentic and legally registered. ✔' });
-  } else {
-    score += 0;
-    criteria.push({ status: 'fail', title: 'Business Not Legally Registered', desc: 'You need a legally registered business entity. Register your business with your local government/chamber of commerce before applying.' });
-  }
-
-  // 5. Business website
-  if (d.bizWebsite) {
-    score += 8;
-    criteria.push({ status: 'pass', title: 'Official Website Present', desc: `A website (${d.bizWebsite}) strengthens your authenticity claim. ✔` });
-  } else {
-    score += 0;
-    criteria.push({ status: 'warn', title: 'No Official Website', desc: 'Having an official website is highly recommended. It proves your business is real and active. Consider creating one at your brand domain.' });
-  }
-
-  // 6. Social media presence
-  const socialCount = [d.fbPage, d.igPage, d.twPage, d.liPage, d.ytPage].filter(Boolean).length;
-  if (socialCount >= 3) {
-    score += 10;
-    criteria.push({ status: 'pass', title: `Strong Social Media Presence (${socialCount} platforms)`, desc: 'Having accounts on multiple platforms signals a legitimate, active brand. ✔' });
-  } else if (socialCount >= 1) {
-    score += 4;
-    criteria.push({ status: 'warn', title: `Limited Social Media Presence (${socialCount} platform${socialCount > 1 ? 's' : ''})`, desc: 'Try to build presence on at least Facebook, Instagram, and LinkedIn. More platforms = stronger notability signal.' });
-  } else {
-    score += 0;
-    criteria.push({ status: 'fail', title: 'No Social Media Accounts Provided', desc: 'You need active social media pages to demonstrate notability. Create and grow pages on Facebook, Instagram, and LinkedIn at minimum.' });
-  }
-
-  // 7. Facebook page + verification
-  if (d.fbPage && d.fbVerified === 'yes') {
-    score += 8;
-    criteria.push({ status: 'pass', title: 'Verified Facebook Business Page', desc: 'A verified Facebook page linked to your business greatly strengthens your WhatsApp verification application. ✔' });
-  } else if (d.fbPage) {
-    score += 3;
-    criteria.push({ status: 'warn', title: 'Facebook Page Exists but Not Verified', desc: 'Consider applying for Meta verification on your Facebook page at <a href="https://www.facebook.com/help/100168986860974" target="_blank">Facebook Help Center</a>.' });
-  } else {
-    score += 0;
-    criteria.push({ status: 'fail', title: 'No Facebook Business Page', desc: 'Create an official Facebook Business Page and connect it to your Meta Business Manager. This is strongly linked to WhatsApp badge eligibility.' });
-  }
-
-  // 8. Followers / reach
-  const followers = parseInt(d.smFollowers || '0');
-  if (followers >= 3) {
-    score += 8;
-    criteria.push({ status: 'pass', title: 'Large Social Following (50K+)', desc: 'Your combined following demonstrates significant brand reach — a key notability factor. ✔' });
-  } else if (followers >= 2) {
-    score += 4;
-    criteria.push({ status: 'warn', title: 'Moderate Following (10K–50K)', desc: 'Your following is decent. Growing beyond 50K across platforms will help your notability case.' });
-  } else {
-    score += 0;
-    criteria.push({ status: 'fail', title: 'Low Social Following', desc: 'Low follower counts make it harder to prove notability. Focus on organically growing your social media audience before applying.' });
-  }
-
-  // 9. Media coverage
-  if (d.mediaPress === 'major') {
-    score += 10;
-    criteria.push({ status: 'pass', title: 'Major Media Coverage', desc: 'Coverage by major news outlets is a strong signal of notability that WhatsApp looks for. ✔' });
-  } else if (d.mediaPress === 'local') {
-    score += 4;
-    criteria.push({ status: 'warn', title: 'Local / Regional Media Coverage', desc: 'Some press coverage exists. Try to get mentioned in national or industry-specific publications to strengthen your case.' });
-  } else {
-    score += 0;
-    criteria.push({ status: 'fail', title: 'No Media Coverage', desc: 'Consider issuing press releases, contributing articles, or reaching out to industry journalists to build your media footprint.' });
-  }
-
-  // 10. Notability signals
-  if (d.notabilityItems >= 3) {
-    score += 6;
-    criteria.push({ status: 'pass', title: `Strong Notability Signals (${d.notabilityItems} indicators)`, desc: 'Wikipedia listing, awards, global presence, and other signals confirm your brand is notable. ✔' });
-  } else if (d.notabilityItems >= 1) {
-    score += 2;
-    criteria.push({ status: 'warn', title: `Some Notability Signals (${d.notabilityItems} indicator${d.notabilityItems > 1 ? 's' : ''})`, desc: 'Build more recognition: get listed on Wikipedia, apply for industry awards, and expand your digital footprint.' });
-  }
-
-  // 11. Business age
-  const age = parseInt(d.bizAge || '0');
-  if (age >= 3) {
-    score += 5;
-    criteria.push({ status: 'pass', title: 'Established Business (3+ years)', desc: 'An older business signals authenticity and stability to WhatsApp\'s review team. ✔' });
-  } else if (age >= 1) {
-    score += 2;
-    criteria.push({ status: 'warn', title: 'Relatively New Business (1–3 years)', desc: 'Newer businesses may face higher scrutiny. Ensure all other signals are strong.' });
-  } else {
-    criteria.push({ status: 'warn', title: 'Very New Business (under 1 year)', desc: 'Businesses under 1 year old are rarely approved for verification. Build your track record first.' });
-  }
-
-  // 12. Google presence
-  if (d.googlePanel === 'both') {
-    score += 5;
-    criteria.push({ status: 'pass', title: 'Google My Business + Knowledge Panel', desc: 'Strong Google presence confirms your brand\'s legitimacy and searchability. ✔' });
-  } else if (d.googlePanel === 'gmb') {
-    score += 2;
-    criteria.push({ status: 'warn', title: 'Google My Business (no Knowledge Panel)', desc: 'Set up a Google My Business profile if you haven\'t. A Knowledge Panel appears automatically as your brand grows in search.' });
-  } else {
-    criteria.push({ status: 'fail', title: 'No Google Business Presence', desc: 'Set up a Google My Business profile at <a href="https://business.google.com" target="_blank">business.google.com</a>. It adds credibility to your brand.' });
-  }
-
-  // === VERDICT ===
-  let verdict, headerClass, emoji, subtitle;
-  if (score >= 75) {
-    verdict = 'Highly Eligible';
-    headerClass = 'result-eligible';
-    emoji = '✅';
-    subtitle = `${d.bizName || 'Your business'} meets the key WhatsApp Blue Badge criteria. You're in a strong position to apply — follow the steps below to submit your application.`;
-  } else if (score >= 50) {
-    verdict = 'Partially Eligible';
-    headerClass = 'result-partial';
-    emoji = '⚡';
-    subtitle = `${d.bizName || 'Your business'} meets some criteria but has gaps that may lead to rejection. Address the missing requirements below before applying.`;
-  } else {
-    verdict = 'Not Yet Eligible';
-    headerClass = 'result-ineligible';
-    emoji = '❌';
-    subtitle = `${d.bizName || 'Your business'} currently doesn't meet enough of WhatsApp's requirements. Use the action steps below to build your eligibility.`;
-  }
-
-  // Render results
-  document.getElementById('stepsNav').style.display = 'none';
-  document.getElementById('progressDots').style.display = 'none';
-  document.querySelectorAll('.step-section').forEach(s => s.style.display = 'none');
-
-  document.getElementById('result-header-div').innerHTML = `
-    <div class="result-header ${headerClass}">
-      <div class="result-badge-icon">${emoji}</div>
-      <h2>${verdict}</h2>
-      <p>${subtitle}</p>
-    </div>
-  `;
-
-  document.getElementById('scoreBar').style.width = score + '%';
-  document.getElementById('scoreText').textContent = score + '%';
-
-  // Criteria
-  let criteriaHTML = '<div class="criteria-list">';
-  criteria.forEach(c => {
-    const dotClass = c.status === 'pass' ? 'dot-pass' : c.status === 'fail' ? 'dot-fail' : 'dot-warn';
-    const icon = c.status === 'pass' ? '✓' : c.status === 'fail' ? '✗' : '!';
-    criteriaHTML += `
-      <div class="criteria-item">
-        <div class="criteria-dot ${dotClass}">${icon}</div>
-        <div class="criteria-text">
-          <h4>${c.title}</h4>
-          <p>${c.desc}</p>
-        </div>
-      </div>`;
-  });
-  criteriaHTML += '</div>';
-  document.getElementById('criteria-output').innerHTML = criteriaHTML;
-
-  // Action steps
-  let actionHTML = '';
-  if (score >= 75) {
-    actionHTML = `
-      <div class="action-box success-box">
-        <h3>🚀 How to Apply for Your WhatsApp Blue Badge</h3>
-        <ul class="action-steps">
-          <li><div class="step-num-sm">1</div> Make sure your WhatsApp Business Account is connected to Meta Business Manager at <strong>business.facebook.com</strong></li>
-          <li><div class="step-num-sm">2</div> In Meta Business Manager, go to <strong>Settings → WhatsApp Accounts</strong> and select your number</li>
-          <li><div class="step-num-sm">3</div> Click on <strong>"Request Official Business Account"</strong> (this triggers the badge review)</li>
-          <li><div class="step-num-sm">4</div> Fill in all required business details accurately — legal name, website, category</li>
-          <li><div class="step-num-sm">5</div> Submit supporting documents if requested (business registration, website, social links)</li>
-          <li><div class="step-num-sm">6</div> Wait 5–7 business days for Meta's review team to evaluate your application</li>
-          <li><div class="step-num-sm">7</div> If approved, the green badge converts to a blue verified checkmark in your profile</li>
-        </ul>
-      </div>`;
-  } else if (score >= 50) {
-    actionHTML = `
-      <div class="action-box warning-box">
-        <h3>⚡ Steps to Improve Before Applying</h3>
-        <ul class="action-steps">
-          ${!d.fbPage ? '<li><div class="step-num-sm">1</div> Create and optimize an official <strong>Facebook Business Page</strong> and connect it to Meta Business Manager</li>' : ''}
-          ${d.waType !== 'api' ? '<li><div class="step-num-sm">2</div> Migrate to <strong>WhatsApp Business API</strong> via a BSP (Twilio, 360dialog, Bird, etc.)</li>' : ''}
-          ${d.metaBiz !== 'yes' ? '<li><div class="step-num-sm">3</div> Connect your number to <strong>Meta Business Manager</strong> at business.facebook.com</li>' : ''}
-          ${d.waProfileItems < 7 ? '<li><div class="step-num-sm">4</div> Complete all 8 fields of your <strong>WhatsApp Business Profile</strong></li>' : ''}
-          ${socialCount < 3 ? '<li><div class="step-num-sm">5</div> Build presence on at least <strong>3 social platforms</strong> and grow your audience</li>' : ''}
-          ${d.mediaPress === 'no' ? '<li><div class="step-num-sm">6</div> Get your brand featured in <strong>news articles or press releases</strong></li>' : ''}
-          <li><div class="step-num-sm">7</div> Once gaps are filled, apply via Meta Business Manager → WhatsApp Accounts → Request Official Business Account</li>
-        </ul>
-      </div>`;
-  } else {
-    actionHTML = `
-      <div class="action-box danger-box">
-        <h3>📋 Requirements to Complete Before You Can Apply</h3>
-        <ul class="action-steps">
-          <li><div class="step-num-sm">1</div> <strong>Register your business legally</strong> with your local government authority</li>
-          <li><div class="step-num-sm">2</div> Create a <strong>WhatsApp Business API account</strong> — contact a Meta BSP like Twilio, 360dialog, or apply directly via Meta</li>
-          <li><div class="step-num-sm">3</div> Set up <strong>Meta Business Manager</strong> and connect your WhatsApp number</li>
-          <li><div class="step-num-sm">4</div> Create an official <strong>Facebook Business Page</strong> and link it to Meta Business Manager</li>
-          <li><div class="step-num-sm">5</div> Build your brand on <strong>Instagram, LinkedIn, and Twitter</strong></li>
-          <li><div class="step-num-sm">6</div> Set up a <strong>Google My Business</strong> profile</li>
-          <li><div class="step-num-sm">7</div> Build online credibility through <strong>press coverage, Wikipedia listing, and industry recognition</strong></li>
-          <li><div class="step-num-sm">8</div> Only apply once your notability score is significantly stronger — premature applications may permanently impact future reviews</li>
-        </ul>
-      </div>`;
-  }
-  document.getElementById('action-output').innerHTML = actionHTML;
-
-  // Violation-specific guidance
-  let violationHTML = '';
-  if (d.violation === 'nobadge') {
-    violationHTML = `
-      <div class="action-box" style="border-left-color:#3b82f6">
-        <h3>💙 Badge Approved But Not Showing? Here's Why & What To Do</h3>
-        <ul class="action-steps">
-          <li><div class="step-num-sm">1</div> <strong>Cache issue:</strong> Log out of Meta Business Manager, clear cache, and log back in. Reload the WhatsApp manager.</li>
-          <li><div class="step-num-sm">2</div> <strong>Profile display delay:</strong> It can take up to 72 hours after approval for the badge to visually appear in the app.</li>
-          <li><div class="step-num-sm">3</div> <strong>Check your account tier:</strong> In Meta Business Manager, go to WhatsApp Manager → Phone Numbers. If your tier shows "Official Business Account," the badge should appear.</li>
-          <li><div class="step-num-sm">4</div> <strong>API vs App discrepancy:</strong> The blue badge is only visible to users when messaging via the API — it may not show in the WhatsApp Business App view.</li>
-          <li><div class="step-num-sm">5</div> <strong>Contact Meta Support:</strong> Visit <a href="https://business.facebook.com/help" target="_blank">business.facebook.com/help</a> and open a ticket explaining the badge was approved but not displaying.</li>
-          <li><div class="step-num-sm">6</div> <strong>BSP escalation:</strong> If using a Business Service Provider, ask them to escalate with their Meta account manager.</li>
-        </ul>
-      </div>`;
-  } else if (d.violation === 'spam') {
-    violationHTML = `
-      <div class="action-box danger-box">
-        <h3>⚠️ Account Flagged for Spam — Recovery Steps</h3>
-        <ul class="action-steps">
-          <li><div class="step-num-sm">1</div> <strong>Stop all bulk messaging immediately.</strong> Any further mass broadcasts will worsen your account health score.</li>
-          <li><div class="step-num-sm">2</div> <strong>Check your WhatsApp Quality Rating</strong> in Meta Business Manager → Phone Numbers → Quality Rating. Aim to bring it back to "High."</li>
-          <li><div class="step-num-sm">3</div> <strong>Only message opted-in users.</strong> Make sure every contact has explicitly consented to receive messages from you.</li>
-          <li><div class="step-num-sm">4</div> <strong>Reduce messaging frequency.</strong> Send relevant, high-quality messages only — not promotional blasts.</li>
-          <li><div class="step-num-sm">5</div> <strong>Enable two-way messaging.</strong> Reply to customer messages promptly. High engagement rates improve your health score.</li>
-          <li><div class="step-num-sm">6</div> <strong>Wait 7–30 days</strong> while maintaining clean messaging behavior. Quality Rating typically recovers within this period.</li>
-          <li><div class="step-num-sm">7</div> <strong>Do NOT apply for the badge</strong> while your account is flagged — it will be automatically rejected.</li>
-        </ul>
-      </div>`;
-  } else if (d.violation === 'policy') {
-    violationHTML = `
-      <div class="action-box danger-box">
-        <h3>🚫 Policy Violation / Account Banned — Recovery Steps</h3>
-        <ul class="action-steps">
-          <li><div class="step-num-sm">1</div> <strong>Identify the exact violation:</strong> Go to Meta Business Manager → Account Quality → View Details. Note the specific policy that was violated.</li>
-          <li><div class="step-num-sm">2</div> <strong>Read the violation notice carefully.</strong> Meta sends an email/notification explaining the reason. If you didn't receive one, check your spam/junk folder.</li>
-          <li><div class="step-num-sm">3</div> <strong>File an appeal:</strong> Visit <a href="https://www.facebook.com/help/contact/634637666599479" target="_blank">Meta's appeal form</a>. Provide your business details and a clear explanation of why the ban was an error or how you will comply.</li>
-          <li><div class="step-num-sm">4</div> <strong>Remove violating content:</strong> If specific content caused the ban, delete it immediately before appealing.</li>
-          <li><div class="step-num-sm">5</div> <strong>Review WhatsApp Commerce Policy:</strong> Especially if you sell products. Certain categories (crypto, adult content, weapons, etc.) are prohibited.</li>
-          <li><div class="step-num-sm">6</div> <strong>Wait for review:</strong> Appeals take 5–10 business days. Do not create a new account — this violates Meta's terms further.</li>
-          <li><div class="step-num-sm">7</div> <strong>If the appeal is successful:</strong> Your account is reinstated. Then focus on building eligibility before reapplying for the badge.</li>
-        </ul>
-      </div>`;
-  } else if (d.violation === 'impersonation') {
-    violationHTML = `
-      <div class="action-box" style="border-left-color:#a855f7">
-        <h3>👤 Impersonation / Identity Issue — Resolution Steps</h3>
-        <ul class="action-steps">
-          <li><div class="step-num-sm">1</div> <strong>Report the impersonating account:</strong> Open the WhatsApp chat with the fake account → Tap the three dots → Report. This flags the number to WhatsApp's safety team.</li>
-          <li><div class="step-num-sm">2</div> <strong>Submit a formal report via WhatsApp:</strong> Email <strong>support@whatsapp.com</strong> with the subject "Impersonation Report" and include: your business name, the fake number, screenshots, and proof of ownership (website, business registration).</li>
-          <li><div class="step-num-sm">3</div> <strong>Report to Meta:</strong> Use the <a href="https://www.facebook.com/help/contact/457255354294557" target="_blank">Meta IP reporting form</a> to file a trademark/impersonation report.</li>
-          <li><div class="step-num-sm">4</div> <strong>If your own account was flagged as impersonation:</strong> Gather proof of identity (legal registration, official website, social media profiles) and submit to <a href="https://www.whatsapp.com/contact/appeals" target="_blank">whatsapp.com/contact/appeals</a>.</li>
-          <li><div class="step-num-sm">5</div> <strong>Alert your customers</strong> about the fake account via your official channels to prevent fraud.</li>
-          <li><div class="step-num-sm">6</div> <strong>Apply for the Blue Badge</strong> once the issue is resolved — verification will help prevent future impersonation.</li>
-        </ul>
-      </div>`;
-  } else if (d.violation === 'rejected') {
-    violationHTML = `
-      <div class="action-box warning-box">
-        <h3>❌ Application Rejected — How to Reapply Successfully</h3>
-        <ul class="action-steps">
-          <li><div class="step-num-sm">1</div> <strong>Do not reapply immediately.</strong> Repeated rejections can hurt your account's standing. Wait at least 30 days.</li>
-          <li><div class="step-num-sm">2</div> <strong>Common rejection reasons:</strong> Incomplete profile, not enough media coverage, not using the WhatsApp API, unverified Facebook page, low followers.</li>
-          <li><div class="step-num-sm">3</div> <strong>Complete your business profile</strong> fully in WhatsApp Business Manager — all 8 fields must be filled accurately.</li>
-          <li><div class="step-num-sm">4</div> <strong>Build your online presence:</strong> Get press mentions, grow social following, get listed on Wikipedia or notable directories.</li>
-          <li><div class="step-num-sm">5</div> <strong>Get your Facebook Page verified</strong> first — it's easier and signals to Meta that your brand is notable.</li>
-          <li><div class="step-num-sm">6</div> <strong>Contact your BSP account manager</strong> (if using a Business Service Provider) — they can often escalate your case directly with Meta.</li>
-          <li><div class="step-num-sm">7</div> Once you've significantly improved your presence, reapply via Meta Business Manager → WhatsApp Accounts → Request Official Business Account.</li>
-        </ul>
-      </div>`;
-  }
-  document.getElementById('violation-output').innerHTML = violationHTML;
-
-  document.getElementById('results-section').style.display = 'block';
-
-  setTimeout(() => {
-    document.getElementById('scoreBar').style.width = score + '%';
-  }, 100);
-
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-function restart() {
-  location.reload();
-}
 </script>
 </body>
 </html>
